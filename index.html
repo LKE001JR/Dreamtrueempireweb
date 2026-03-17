@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dream True Empire | Fun Team Building & Workshops Malaysia</title>
+    <meta name="description" content="We organize fun team building, mental wellness workshops, and CSR programs in Malaysia. HRDF claimable or custom budget - we make it work for you!">
+    
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Load Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800;900&family=Permanent+Marker&display=swap" rel="stylesheet">
+    
+    <!-- Custom Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        fun: ['Permanent Marker', 'cursive'],
+                    },
+                    colors: {
+                        brand: {
+                            light: '#ff80c0',
+                            DEFAULT: '#e3007a', /* Your main pink */
+                            dark: '#b30060',
+                        },
+                        accent: {
+                            DEFAULT: '#8B5CF6', /* A fun purple */
+                            light: '#A78BFA',
+                        },
+                        fun: {
+                            yellow: '#FCD34D',
+                            green: '#34D399',
+                            blue: '#60A5FA'
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-delayed': 'float 6s ease-in-out 3s infinite',
+                        'marquee': 'marquee 30s linear infinite',
+                        'bounce-slow': 'bounce 3s infinite',
+                        'wiggle': 'wiggle 1s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-15px)' },
+                        },
+                        marquee: {
+                            '0%': { transform: 'translateX(0)' },
+                            '100%': { transform: 'translateX(-50%)' },
+                        },
+                        wiggle: {
+                            '0%, 100%': { transform: 'rotate(-3deg)' },
+                            '50%': { transform: 'rotate(3deg)' },
+                        }
+                    }
+                },
+            },
+        };
+    </script>
+    
+    <!-- Custom CSS -->
+    <style>
+        /* Hide scrollbar for clean look but allow scrolling */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .page { display: none; opacity: 0; transition: opacity 0.3s ease-in-out; }
+        .active-page { display: block; opacity: 1; }
+        
+        html { scroll-behavior: smooth; }
+
+        /* Fun Hover Effects */
+        .fun-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .fun-card:hover {
+            transform: translateY(-10px) rotate(1deg);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800 font-sans selection:bg-brand-light selection:text-white overflow-x-hidden">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm transition-all duration-300">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <a href="#" onclick="showPage('page-home')" class="flex items-center gap-3 group cursor-pointer">
+                    <div class="w-10 h-10 bg-gradient-to-br from-brand to-accent rounded-full flex items-center justify-center text-white font-fun text-xl shadow-md transform group-hover:rotate-12 transition-transform">D</div>
+                    <div class="flex flex-col">
+                        <span class="text-xl font-black text-gray-900 leading-none tracking-tight">DREAM TRUE</span>
+                        <span class="text-xs font-bold text-brand tracking-[0.2em] leading-none mt-1">EMPIRE</span>
+                    </div>
+                </a>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#" onclick="showPage('page-home')" class="font-bold text-gray-600 hover:text-brand transition-colors">Home</a>
+                    <a href="#" onclick="showPage('page-services')" class="font-bold text-gray-600 hover:text-brand transition-colors">Adventures</a>
+                    <a href="#" onclick="showPage('page-about')" class="font-bold text-gray-600 hover:text-brand transition-colors">Our Vibe</a>
+                    <a href="#" onclick="showPage('page-contact')" class="bg-gray-900 text-white px-6 py-2.5 rounded-full font-bold hover:bg-brand hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 transform active:scale-95">
+                        Let's Talk!
+                    </a>
+                </div>
+
+                <!-- Mobile Hamburger -->
+                <button id="mobile-menu-btn" class="md:hidden text-gray-800 focus:outline-none p-2 rounded-md hover:bg-gray-100">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full shadow-xl z-50 transition-all duration-300 ease-in-out transform origin-top">
+            <div class="flex flex-col p-4 gap-2">
+                <a href="#" onclick="showPage('page-home')" class="block px-4 py-3 rounded-lg font-bold text-lg text-gray-800 hover:bg-gray-50 hover:text-brand">Home</a>
+                <a href="#" onclick="showPage('page-services')" class="block px-4 py-3 rounded-lg font-bold text-lg text-gray-800 hover:bg-gray-50 hover:text-brand">Adventures</a>
+                <a href="#" onclick="showPage('page-about')" class="block px-4 py-3 rounded-lg font-bold text-lg text-gray-800 hover:bg-gray-50 hover:text-brand">Our Vibe</a>
+                <a href="#" onclick="showPage('page-contact')" class="block px-4 py-3 mt-2 rounded-lg bg-brand text-white text-center font-bold shadow-md active:scale-95 transition-transform">Let's Talk!</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-20">
+        
+        <!-- ================= HOME PAGE ================= -->
+        <div id="page-home" class="page active-page">
+            
+            <!-- HERO SECTION -->
+            <section class="relative overflow-hidden bg-gradient-to-br from-indigo-50 via-pink-50 to-white pt-20 pb-28 md:pt-32 md:pb-40">
+                <!-- Background Blobs -->
+                <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-brand/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4 pointer-events-none"></div>
+                <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-fun-blue/10 rounded-full blur-3xl translate-y-1/4 -translate-x-1/4 pointer-events-none"></div>
+
+                <!-- Floating Fun Stickers (Pushed to sides to avoid text block) -->
+                <div class="hidden lg:block absolute top-32 left-[5%] animate-float z-20">
+                    <div class="bg-white p-4 rounded-2xl shadow-xl border-2 border-gray-100 transform -rotate-6 hover:scale-110 transition-transform cursor-default">
+                        <div class="text-5xl mb-2 text-center">🤝</div>
+                        <p class="font-fun text-brand text-2xl text-center transform -rotate-2">We Bond!</p>
+                    </div>
+                </div>
+                <div class="hidden lg:block absolute bottom-40 right-[5%] animate-float-delayed z-20">
+                    <div class="bg-white p-4 rounded-2xl shadow-xl border-2 border-gray-100 transform rotate-6 hover:scale-110 transition-transform cursor-default">
+                        <div class="text-5xl mb-2 text-center">🎉</div>
+                        <p class="font-fun text-fun-blue text-2xl text-center transform rotate-2">We Play!</p>
+                    </div>
+                </div>
+
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+                    <!-- Fun Badge -->
+                    <div class="inline-flex items-center gap-2 py-2 px-4 rounded-full bg-white border-2 border-gray-100 shadow-sm mb-8 hover:shadow-md transition-shadow cursor-default transform hover:-translate-y-1">
+                        <span class="text-2xl">✨</span>
+                        <span class="text-gray-800 font-bold text-sm tracking-wider uppercase">Friendly. Fun. Flexible.</span>
+                    </div>
+                    
+                    <!-- Main Headline -->
+                    <h1 class="text-5xl sm:text-7xl md:text-8xl font-black text-gray-900 leading-tight mb-8 tracking-tight drop-shadow-sm">
+                        Bring Your People <br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand via-purple-500 to-fun-blue animate-pulse-slow">Together.</span>
+                    </h1>
+                    
+                    <!-- Subheadline -->
+                    <p class="text-xl sm:text-2xl text-gray-600 max-w-3xl mx-auto mb-12 font-medium leading-relaxed">
+                        Forget boring "corporate training." We design fun workshops, meaningful bonding, and real adventures for your team.
+                        <br><span class="text-gray-500 font-bold text-lg mt-3 block">HRDF budget? Use it. Custom budget? We make it work!</span>
+                    </p>
+                    
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                        <button onclick="showPage('page-contact')" class="px-10 py-5 bg-brand text-white rounded-full font-bold text-xl shadow-brand/30 shadow-xl hover:scale-105 transition-all duration-300 hover:bg-brand-dark">
+                            Start the Fun! 🚀
+                        </button>
+                        <button onclick="showPage('page-services')" class="px-10 py-5 bg-white text-gray-900 border-2 border-gray-200 rounded-full font-bold text-xl hover:border-brand hover:text-brand transition-all hover:shadow-lg">
+                            See Adventures
+                        </button>
+                    </div>
+                    
+                    <!-- Trust Strip -->
+                    <div class="mt-16 text-sm font-bold text-gray-400 uppercase tracking-widest">
+                        The Team Building Specialists for KL & Selangor
+                    </div>
+                </div>
+            </section>
+
+            <!-- INFINITE MARQUEE: Trusted Partners -->
+            <section class="py-12 bg-white border-y-2 border-gray-100 overflow-hidden">
+                <div class="container mx-auto px-4 mb-8 text-center">
+                    <p class="text-lg font-black text-gray-800 font-fun transform -rotate-1">Trusted by Awesome Teams at:</p>
+                </div>
+                
+                <!-- Marquee Container -->
+                <div class="relative w-full overflow-hidden">
+                    <!-- Left Fade -->
+                    <div class="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-white to-transparent z-10"></div>
+                    <!-- Right Fade -->
+                    <div class="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-white to-transparent z-10"></div>
+
+                    <div class="flex w-max animate-marquee items-center hover:[animation-play-state:paused]">
+                        <!-- Logo Set 1 -->
+                        <div class="flex justify-around items-center px-8 gap-16 opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500">
+                            <span class="text-3xl font-black text-gray-800">HUNTSMAN</span>
+                            <span class="text-3xl font-black text-gray-800">Energizer</span>
+                            <span class="text-3xl font-black text-gray-800">SAMSUNG</span>
+                            <span class="text-3xl font-black text-gray-800">Kimberly-Clark</span>
+                            <span class="text-3xl font-black text-gray-800">Hong Leong</span>
+                            <span class="text-3xl font-black text-gray-800">Alvarez & Marsal</span>
+                            <span class="text-3xl font-black text-gray-800">Prudential</span>
+                            <span class="text-3xl font-black text-gray-800">Shopee</span>
+                        </div>
+                        <!-- Logo Set 2 (Duplicate) -->
+                        <div class="flex justify-around items-center px-8 gap-16 opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500">
+                            <span class="text-3xl font-black text-gray-800">HUNTSMAN</span>
+                            <span class="text-3xl font-black text-gray-800">Energizer</span>
+                            <span class="text-3xl font-black text-gray-800">SAMSUNG</span>
+                            <span class="text-3xl font-black text-gray-800">Kimberly-Clark</span>
+                            <span class="text-3xl font-black text-gray-800">Hong Leong</span>
+                            <span class="text-3xl font-black text-gray-800">Alvarez & Marsal</span>
+                            <span class="text-3xl font-black text-gray-800">Prudential</span>
+                            <span class="text-3xl font-black text-gray-800">Shopee</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDER: Choose Your Vibe -->
+            <section class="py-24 bg-white">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+                        <div>
+                            <h2 class="text-4xl md:text-6xl font-black text-gray-900 mb-4 tracking-tight">Choose Your <span class="text-fun-blue font-fun transform rotate-2 inline-block">Vibe</span></h2>
+                            <p class="text-gray-500 text-xl font-medium max-w-xl">What does your team need right now? Swipe to explore.</p>
+                        </div>
+                        <!-- Controls -->
+                        <div class="flex gap-3">
+                            <button onclick="scrollSlider('program-slider', 'left')" class="w-14 h-14 rounded-full border-2 border-gray-200 flex items-center justify-center hover:bg-gray-100 hover:border-gray-300 transition-all text-2xl active:scale-90">←</button>
+                            <button onclick="scrollSlider('program-slider', 'right')" class="w-14 h-14 rounded-full bg-gray-900 text-white flex items-center justify-center hover:bg-brand transition-all text-2xl shadow-lg active:scale-90">→</button>
+                        </div>
+                    </div>
+
+                    <!-- Horizontal Scroll -->
+                    <div id="program-slider" class="flex gap-8 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-16 px-4 -mx-4">
+                        
+                        <!-- Card 1: FUN -->
+                        <div class="min-w-[85%] md:min-w-[400px] snap-center bg-white rounded-[2.5rem] shadow-xl border-2 border-gray-100 overflow-hidden fun-card cursor-pointer flex flex-col h-full group">
+                            <div class="h-64 bg-fun-yellow/20 relative overflow-hidden">
+                                <img src="https://placehold.co/600x400/FCD34D/FFF?text=Team+Fun" alt="Team Fun" class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110">
+                                <div class="absolute top-6 left-6 bg-white/90 backdrop-blur-md px-4 py-2 rounded-full text-sm font-bold uppercase tracking-wide text-yellow-600 shadow-sm z-10">🔥 Most Popular</div>
+                            </div>
+                            <div class="p-8 flex flex-col flex-grow">
+                                <h3 class="text-3xl font-black text-gray-900 font-fun mb-3 group-hover:text-yellow-500 transition-colors">"We Want Fun!"</h3>
+                                <p class="text-gray-600 text-lg leading-relaxed mb-6">Creative workshops, Amazing Races, and high-trust challenges. Zero boring lectures.</p>
+                                <div class="mt-auto">
+                                    <span class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-4">HRDF or Custom Budget</span>
+                                    <button onclick="showPage('page-contact')" class="w-full py-4 rounded-xl bg-yellow-400 text-white font-bold hover:bg-yellow-500 transition-colors text-lg shadow-md">Let's Play</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 2: WELLNESS -->
+                        <div class="min-w-[85%] md:min-w-[400px] snap-center bg-white rounded-[2.5rem] shadow-xl border-2 border-gray-100 overflow-hidden fun-card cursor-pointer flex flex-col h-full group">
+                            <div class="h-64 bg-brand/10 relative overflow-hidden">
+                                <img src="https://placehold.co/600x400/FCE7F3/FFF?text=Wellness" alt="Wellness" class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110">
+                            </div>
+                            <div class="p-8 flex flex-col flex-grow">
+                                <h3 class="text-3xl font-black text-gray-900 font-fun mb-3 group-hover:text-brand transition-colors">"We Need a Reset."</h3>
+                                <p class="text-gray-600 text-lg leading-relaxed mb-6">Mental wellness workshops, Gut-Brain connection, and culinary therapy (yes, cooking!).</p>
+                                <div class="mt-auto">
+                                    <span class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-4">HRDF or Custom Budget</span>
+                                    <button onclick="showPage('page-contact')" class="w-full py-4 rounded-xl bg-brand text-white font-bold hover:bg-brand-dark transition-colors text-lg shadow-md">Heal Together</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 3: CSR -->
+                        <div class="min-w-[85%] md:min-w-[400px] snap-center bg-white rounded-[2.5rem] shadow-xl border-2 border-gray-100 overflow-hidden fun-card cursor-pointer flex flex-col h-full group">
+                            <div class="h-64 bg-fun-green/20 relative overflow-hidden">
+                                <img src="https://placehold.co/600x400/34D399/FFF?text=CSR+Love" alt="CSR" class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110">
+                            </div>
+                            <div class="p-8 flex flex-col flex-grow">
+                                <h3 class="text-3xl font-black text-gray-900 font-fun mb-3 group-hover:text-green-600 transition-colors">"We Want to Give Back."</h3>
+                                <p class="text-gray-600 text-lg leading-relaxed mb-6">Meaningful CSR programs. Build bikes, plant trees, or feed communities together.</p>
+                                <div class="mt-auto">
+                                    <span class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-4">HRDF or Custom Budget</span>
+                                    <button onclick="showPage('page-contact')" class="w-full py-4 rounded-xl bg-green-500 text-white font-bold hover:bg-green-600 transition-colors text-lg shadow-md">Make Impact</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </section>
+            
+            <!-- SLIDER: Reviews (Auto-Scrolling) -->
+            <section class="py-24 bg-gray-50 relative overflow-hidden">
+                <!-- Decorative Background -->
+                <div class="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/subtle-dots.png')] opacity-30 pointer-events-none"></div>
+                
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <div class="text-center mb-16">
+                        <h2 class="text-4xl md:text-6xl font-black text-gray-900 font-fun mb-6 transform -rotate-1">Reviews That Speak Volumes</h2>
+                        <p class="text-gray-600 text-xl max-w-2xl mx-auto">Real feedback from real people. (We checked, they definitely aren't robots).</p>
+                    </div>
+
+                    <div class="relative max-w-7xl mx-auto group"> 
+                        <div id="review-slider" class="flex gap-6 overflow-x-auto no-scrollbar snap-x snap-mandatory px-4 pb-12 -mx-4">
+                            
+                            <!-- Review 1 -->
+                            <div class="min-w-[300px] md:min-w-[380px] snap-center bg-white p-8 rounded-[2rem] shadow-sm hover:shadow-xl transition-all border border-gray-100 flex flex-col transform hover:-translate-y-2">
+                                <div class="flex items-center gap-4 mb-6">
+                                    <div class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-md">S</div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-900 text-lg">See Ee Ooi</h4>
+                                        <div class="flex text-yellow-400 text-sm">★★★★★</div>
+                                    </div>
+                                    <div class="ml-auto opacity-30 font-bold text-gray-400 text-2xl">G</div>
+                                </div>
+                                <p class="text-gray-700 italic text-lg leading-relaxed">"Truly enjoyed the session. Highly recommended! It wasn't boring at all. Best team building in KL so far."</p>
+                                <p class="text-xs text-gray-400 mt-auto pt-8 font-semibold uppercase tracking-wide">5 months ago</p>
+                            </div>
+
+                            <!-- Review 2 -->
+                            <div class="min-w-[300px] md:min-w-[380px] snap-center bg-white p-8 rounded-[2rem] shadow-sm hover:shadow-xl transition-all border border-gray-100 flex flex-col transform hover:-translate-y-2">
+                                <div class="flex items-center gap-4 mb-6">
+                                    <div class="w-12 h-12 bg-blue-500 rounded-full overflow-hidden flex items-center justify-center text-white font-bold text-xl shadow-md">JL</div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-900 text-lg">Journey Ling</h4>
+                                        <div class="flex text-yellow-400 text-sm">★★★★★</div>
+                                    </div>
+                                    <div class="ml-auto opacity-30 font-bold text-gray-400 text-2xl">G</div>
+                                </div>
+                                <p class="text-gray-700 italic text-lg leading-relaxed">"Fun and interesting session to bond with others and discover oneself. Perfume making was the highlight!"</p>
+                                <p class="text-xs text-gray-400 mt-auto pt-8 font-semibold uppercase tracking-wide">5 months ago</p>
+                            </div>
+
+                            <!-- Review 3 -->
+                            <div class="min-w-[300px] md:min-w-[380px] snap-center bg-white p-8 rounded-[2rem] shadow-sm hover:shadow-xl transition-all border border-gray-100 flex flex-col transform hover:-translate-y-2">
+                                <div class="flex items-center gap-4 mb-6">
+                                    <div class="w-12 h-12 bg-green-500 rounded-full overflow-hidden flex items-center justify-center text-white font-bold text-xl shadow-md">LY</div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-900 text-lg">Ling Ying</h4>
+                                        <div class="flex text-yellow-400 text-sm">★★★★★</div>
+                                    </div>
+                                    <div class="ml-auto opacity-30 font-bold text-gray-400 text-2xl">G</div>
+                                </div>
+                                <p class="text-gray-700 italic text-lg leading-relaxed">"Great bonding session. Finally met my remote colleagues in person and it wasn't awkward! Good job DTE."</p>
+                                <p class="text-xs text-gray-400 mt-auto pt-8 font-semibold uppercase tracking-wide">5 months ago</p>
+                            </div>
+                             <!-- Review 4 -->
+                            <div class="min-w-[300px] md:min-w-[380px] snap-center bg-white p-8 rounded-[2rem] shadow-sm hover:shadow-xl transition-all border border-gray-100 flex flex-col transform hover:-translate-y-2">
+                                <div class="flex items-center gap-4 mb-6">
+                                    <div class="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-md">A</div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-900 text-lg">Alex Tan</h4>
+                                        <div class="flex text-yellow-400 text-sm">★★★★★</div>
+                                    </div>
+                                    <div class="ml-auto opacity-30 font-bold text-gray-400 text-2xl">G</div>
+                                </div>
+                                <p class="text-gray-700 italic text-lg leading-relaxed">"Best HRDF team building provider we've used in Malaysia. The CSR program was actually meaningful."</p>
+                                <p class="text-xs text-gray-400 mt-auto pt-8 font-semibold uppercase tracking-wide">2 months ago</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- CTA Section -->
+            <section class="py-32 bg-gray-900 text-white text-center relative overflow-hidden">
+                <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
+                <!-- Background Glows -->
+                <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-brand/20 to-accent/20"></div>
+
+                <div class="container mx-auto px-4 relative z-10">
+                    <h2 class="text-4xl md:text-7xl font-black mb-8 tracking-tight">Ready to make work <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand to-pink-500">fun again?</span></h2>
+                    <p class="text-xl text-gray-300 mb-12 max-w-2xl mx-auto font-light">Custom budget? HRDF claimable? Big group? Small group? <br><strong class="text-white">We handle it all.</strong></p>
+                    <button onclick="showPage('page-contact')" class="bg-white text-gray-900 hover:bg-brand hover:text-white font-bold py-5 px-12 rounded-full text-xl transition-all shadow-2xl transform hover:-translate-y-1 hover:scale-105 duration-300">
+                        Let's Chat!
+                    </button>
+                </div>
+            </section>
+        </div>
+        
+        <!-- ================= SERVICES PAGE ================= -->
+        <div id="page-services" class="page">
+            <!-- Header -->
+            <div class="bg-gray-50 pt-32 pb-20 text-center">
+                <div class="container mx-auto px-4">
+                    <h1 class="text-5xl md:text-7xl font-black text-gray-900 mb-6 tracking-tight">Our <span class="text-brand font-fun transform rotate-2 inline-block">Adventures</span></h1>
+                    <p class="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">From creative indoor workshops to outdoor challenges. All <span class="font-bold text-gray-900">Customizable</span>.</p>
+                </div>
+            </div>
+            
+            <!-- Services Grid -->
+            <div class="py-20 bg-white">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                        <!-- (Service Cards - Same Content, Updated Visuals in CSS) -->
+                        <!-- 1. Team Building -->
+                        <div class="bg-white rounded-[2.5rem] shadow-xl border border-gray-100 overflow-hidden flex flex-col fun-card">
+                            <div class="h-72 bg-fun-yellow/20 relative overflow-hidden flex items-center justify-center group">
+                                <img src="https://placehold.co/600x400/FFF7ED/F59E0B?text=Team+Fun" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500">
+                                <h2 class="text-5xl font-fun text-yellow-600 drop-shadow-sm z-10 rotate-[-2deg] group-hover:scale-110 transition-transform duration-300">Team Fun</h2>
+                            </div>
+                            <div class="p-10">
+                                <p class="text-gray-600 mb-8 text-lg leading-relaxed">High-trust, engaging, and creative experiences designed to strengthen bonds. No boring lectures allowed.</p>
+                                <ul class="space-y-4 mb-10">
+                                    <li class="flex items-center gap-4 text-gray-700 font-medium"><span class="w-6 h-6 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center text-sm">✓</span> Indoor & Outdoor Challenges</li>
+                                    <li class="flex items-center gap-4 text-gray-700 font-medium"><span class="w-6 h-6 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center text-sm">✓</span> Amazing Race Style Events</li>
+                                </ul>
+                                <button onclick="showPage('page-contact')" class="w-full py-4 rounded-xl bg-yellow-400 text-white font-bold hover:bg-yellow-500 transition-colors text-lg shadow-md">Get Quote</button>
+                            </div>
+                        </div>
+                        
+                         <!-- 2. Wellness -->
+                         <div class="bg-white rounded-[2.5rem] shadow-xl border border-gray-100 overflow-hidden flex flex-col fun-card">
+                            <div class="h-72 bg-brand/10 relative overflow-hidden flex items-center justify-center group">
+                                <img src="https://placehold.co/600x400/FCE7F3/DB2777?text=Wellness" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500">
+                                <h2 class="text-5xl font-fun text-brand drop-shadow-sm z-10 rotate-[2deg] group-hover:scale-110 transition-transform duration-300">Wellness & Food</h2>
+                            </div>
+                            <div class="p-10">
+                                <p class="text-gray-600 mb-8 text-lg leading-relaxed">Teach teams how nutrition impacts energy and mood, complete with a hands-on culinary session.</p>
+                                <ul class="space-y-4 mb-10">
+                                    <li class="flex items-center gap-4 text-gray-700 font-medium"><span class="w-6 h-6 rounded-full bg-pink-100 text-brand flex items-center justify-center text-sm">✓</span> Cooking & Baking Battles</li>
+                                    <li class="flex items-center gap-4 text-gray-700 font-medium"><span class="w-6 h-6 rounded-full bg-pink-100 text-brand flex items-center justify-center text-sm">✓</span> Gut Health & Nutrition Workshops</li>
+                                </ul>
+                                <button onclick="showPage('page-contact')" class="w-full py-4 rounded-xl bg-brand text-white font-bold hover:bg-brand-dark transition-colors text-lg shadow-md">Get Quote</button>
+                            </div>
+                        </div>
+
+                         <!-- 3. CSR -->
+                         <div class="bg-white rounded-[2.5rem] shadow-xl border border-gray-100 overflow-hidden flex flex-col fun-card">
+                            <div class="h-72 bg-fun-green/20 relative overflow-hidden flex items-center justify-center group">
+                                <img src="https://placehold.co/600x400/DCFCE7/10B981?text=CSR+Impact" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500">
+                                <h2 class="text-5xl font-fun text-green-600 drop-shadow-sm z-10 rotate-[-1deg] group-hover:scale-110 transition-transform duration-300">CSR Impact</h2>
+                            </div>
+                            <div class="p-10">
+                                <p class="text-gray-600 mb-8 text-lg leading-relaxed">Build your team while building the community. We design purpose-driven programs that connect your team to real-world impact.</p>
+                                <ul class="space-y-4 mb-10">
+                                    <li class="flex items-center gap-4 text-gray-700 font-medium"><span class="w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-sm">✓</span> Community Outreach</li>
+                                    <li class="flex items-center gap-4 text-gray-700 font-medium"><span class="w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-sm">✓</span> Environmental Initiatives</li>
+                                </ul>
+                                <button onclick="showPage('page-contact')" class="w-full py-4 rounded-xl bg-green-500 text-white font-bold hover:bg-green-600 transition-colors text-lg shadow-md">Get Quote</button>
+                            </div>
+                        </div>
+
+                        <!-- 4. Management -->
+                        <div class="bg-white rounded-[2.5rem] shadow-xl border border-gray-100 overflow-hidden flex flex-col fun-card">
+                            <div class="h-72 bg-fun-blue/20 relative overflow-hidden flex items-center justify-center group">
+                                <img src="https://placehold.co/600x400/E0E7FF/4F46E5?text=End-to-End" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500">
+                                <h2 class="text-5xl font-fun text-indigo-600 drop-shadow-sm z-10 rotate-[1deg] group-hover:scale-110 transition-transform duration-300">End-to-End</h2>
+                            </div>
+                            <div class="p-10">
+                                <p class="text-gray-600 mb-8 text-lg leading-relaxed">Planning a 500-participant event? We manage everything from the first brainstorm to post-event reporting. You relax, we work.</p>
+                                <ul class="space-y-4 mb-10">
+                                    <li class="flex items-center gap-4 text-gray-700 font-medium"><span class="w-6 h-6 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center text-sm">✓</span> Concept & Logistics</li>
+                                    <li class="flex items-center gap-4 text-gray-700 font-medium"><span class="w-6 h-6 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center text-sm">✓</span> Venue Sourcing</li>
+                                </ul>
+                                <button onclick="showPage('page-contact')" class="w-full py-4 rounded-xl bg-indigo-500 text-white font-bold hover:bg-indigo-600 transition-colors text-lg shadow-md">Get Quote</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= ABOUT PAGE ================= -->
+        <div id="page-about" class="page">
+            <div class="bg-gray-50 pt-32 pb-20 text-center">
+                <div class="container mx-auto px-4">
+                    <h1 class="text-5xl md:text-7xl font-black text-gray-900 mb-6 tracking-tight">Our <span class="text-brand font-fun">Vibe</span></h1>
+                    <p class="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">We exist to spark joy, connection, and purpose.</p>
+                </div>
+            </div>
+
+            <div class="py-20 bg-white">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+                    <div class="prose prose-lg mx-auto text-gray-600">
+                        <p class="lead text-2xl font-light text-gray-800 mb-12 leading-relaxed">
+                            We are a next-generation team-building provider based in SunwayMas, PJ. While we are a fresh face in the HRD Corp registry (2025), our core team brings <span class="font-bold text-brand bg-brand/5 px-1 rounded">years of expertise</span> working with giants like Huntsman and Samsung.
+                        </p>
+                        
+                        <div class="grid md:grid-cols-2 gap-8 my-16">
+                            <div class="bg-brand/5 p-10 rounded-[2rem] border border-brand/10 hover:shadow-lg transition-shadow">
+                                <h3 class="text-3xl font-fun text-brand mb-4">Our Mission</h3>
+                                <p class="text-lg">To create meaningful experiences that empower individuals and strengthen organizations—one team at a time.</p>
+                            </div>
+                            <div class="bg-accent/5 p-10 rounded-[2rem] border border-accent/10 hover:shadow-lg transition-shadow">
+                                <h3 class="text-3xl font-fun text-accent mb-4">Our Vision</h3>
+                                <p class="text-lg">A world where team building feels like play, learning feels like discovery, and work feels like a community.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Meet the Team -->
+                    <div class="mt-24">
+                        <h2 class="text-5xl font-black text-center mb-16 font-fun">Meet The Humans</h2>
+                        <div class="bg-white rounded-[3rem] shadow-2xl border border-gray-100 p-8 md:p-16 flex flex-col md:flex-row items-center gap-12 fun-card">
+                            <div class="w-48 h-48 rounded-full overflow-hidden border-8 border-brand/10 flex-shrink-0 shadow-lg">
+                                <img src="https://placehold.co/200x200/FDECF4/E3007A?text=Megye" class="w-full h-full object-cover">
+                            </div>
+                            <div class="text-center md:text-left">
+                                <h3 class="text-3xl font-black text-gray-900 mb-2">Megye - Seet Mei Chein</h3>
+                                <p class="text-brand font-bold mb-6 text-lg uppercase tracking-widest">Lead Facilitator & Nutritionist</p>
+                                <p class="text-gray-600 text-lg leading-relaxed">PSMB accredited trainer and certified nutritionist. Megye combines wellness with corporate performance. She holds a Certificate in Diet and Nutrition from iTEC UK and has spoken at National Training Week. She's the brain behind our popular "Gut-Brain Connection" program.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ================= CONTACT PAGE ================= -->
+        <div id="page-contact" class="page">
+            <div class="min-h-screen bg-gray-50 py-24 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
+                <div class="max-w-6xl w-full bg-white rounded-[3rem] shadow-2xl overflow-hidden flex flex-col md:flex-row border border-gray-100">
+                    
+                    <!-- Left: Fun Image/Info -->
+                    <div class="bg-brand p-12 md:p-16 text-white md:w-5/12 flex flex-col justify-between relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-white/10 to-transparent pointer-events-none"></div>
+                        
+                        <!-- Decorative Circles -->
+                        <div class="absolute top-[-50px] left-[-50px] w-40 h-40 rounded-full bg-white/10"></div>
+                        <div class="absolute bottom-[-50px] right-[-50px] w-40 h-40 rounded-full bg-white/10"></div>
+
+                        <div class="relative z-10">
+                            <h3 class="text-5xl font-black font-fun mb-6">Let's Chat!</h3>
+                            <p class="opacity-90 mb-12 text-xl font-medium leading-relaxed">Tell us about your team. We promise no sales-y robots, just humans.</p>
+                            <div class="space-y-8">
+                                <div class="flex items-center gap-5 group">
+                                    <span class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center text-2xl group-hover:bg-white group-hover:text-brand transition-colors">📞</span> 
+                                    <span class="text-xl font-bold">+601-111 30317</span>
+                                </div>
+                                <div class="flex items-center gap-5 group">
+                                    <span class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center text-2xl group-hover:bg-white group-hover:text-brand transition-colors">📧</span> 
+                                    <span class="text-xl font-bold">support@dreamtrueempire.com</span>
+                                </div>
+                                <div class="flex items-center gap-5 group">
+                                    <span class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center text-2xl group-hover:bg-white group-hover:text-brand transition-colors">📍</span> 
+                                    <span class="text-xl font-bold">Sunwaymas, PJ</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative z-10 mt-16">
+                            <p class="font-fun text-4xl transform -rotate-6 opacity-90">"Let's make magic!"</p>
+                        </div>
+                    </div>
+
+                    <!-- Right: Form -->
+                    <div class="p-12 md:p-16 md:w-7/12 bg-white">
+                        <form class="space-y-8">
+                            <div class="grid grid-cols-1 gap-8">
+                                <div>
+                                    <label class="block text-sm font-bold text-gray-700 mb-3 uppercase tracking-wider">Your Name</label>
+                                    <input type="text" class="w-full px-6 py-4 rounded-2xl bg-gray-50 border-2 border-transparent focus:bg-white focus:border-brand focus:ring-0 transition-all font-medium text-lg" placeholder="Batman">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-bold text-gray-700 mb-3 uppercase tracking-wider">Company</label>
+                                    <input type="text" class="w-full px-6 py-4 rounded-2xl bg-gray-50 border-2 border-transparent focus:bg-white focus:border-brand focus:ring-0 transition-all font-medium text-lg" placeholder="Wayne Enterprises">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 mb-3 uppercase tracking-wider">What's the vibe?</label>
+                                <div class="relative">
+                                    <select class="w-full px-6 py-4 rounded-2xl bg-gray-50 border-2 border-transparent focus:bg-white focus:border-brand focus:ring-0 transition-all font-medium text-gray-700 text-lg appearance-none cursor-pointer">
+                                        <option>We need Fun Team Building!</option>
+                                        <option>We need Mental Wellness (Help us!)</option>
+                                        <option>We want to do CSR (Give back)</option>
+                                        <option>Just saying hi!</option>
+                                    </select>
+                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-6 text-gray-700">
+                                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" onclick="alert('Woohoo! We got your message. We will be in touch shortly!')" class="w-full bg-gray-900 text-white font-bold py-5 rounded-2xl hover:bg-brand hover:shadow-xl hover:-translate-y-1 transition-all duration-300 shadow-md text-xl">
+                                Send Message 🚀
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-100 py-16">
+        <div class="container mx-auto px-4 text-center">
+            <a href="#" onclick="showPage('page-home')" class="inline-block mb-6">
+                <span class="text-3xl font-black text-gray-900">DREAM TRUE</span>
+                <span class="text-sm font-bold text-brand tracking-widest block">EMPIRE</span>
+            </a>
+            <p class="font-fun text-4xl text-brand mb-6 transform -rotate-2">Bring People Together.</p>
+            <p class="text-gray-500 text-base font-medium mb-8 max-w-md mx-auto">The #1 Fun & Friendly Team Building Provider in Kuala Lumpur & Selangor. HRDF Claimable? Yes. Boring? Never.</p>
+            
+            <div class="flex justify-center gap-8 mb-12">
+                <a href="#" class="text-gray-400 hover:text-brand transition-colors font-medium">Instagram</a>
+                <a href="#" class="text-gray-400 hover:text-brand transition-colors font-medium">LinkedIn</a>
+                <a href="#" class="text-gray-400 hover:text-brand transition-colors font-medium">Facebook</a>
+            </div>
+
+            <p class="text-gray-300 text-sm">© 2025 Dream True Empire (202403145895). Made with ❤️ in Malaysia.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation Logic
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => {
+                p.classList.remove('active-page');
+                p.style.opacity = '0';
+                setTimeout(() => {
+                    if(!p.classList.contains('active-page')) p.style.display = 'none';
+                }, 300);
+            });
+            
+            const target = document.getElementById(pageId);
+            target.style.display = 'block';
+            // Force reflow
+            void target.offsetWidth;
+            target.classList.add('active-page');
+            target.style.opacity = '1';
+            
+            window.scrollTo(0, 0);
+            document.getElementById('mobile-menu').classList.add('hidden');
+        }
+
+        // Mobile Menu Toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Slider Logic
+        function scrollSlider(id, direction) {
+            const slider = document.getElementById(id);
+            const scrollAmount = 400;
+            if (direction === 'left') {
+                slider.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            } else {
+                slider.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            }
+        }
+
+        // Auto-Scroll Reviews
+        const reviewSlider = document.getElementById('review-slider');
+        let autoScrollInterval;
+        let isHovering = false;
+
+        function startAutoScroll() {
+            // Clear any existing interval just in case
+            clearInterval(autoScrollInterval);
+            
+            autoScrollInterval = setInterval(() => {
+                if (!isHovering) {
+                    // Check if we are at the end
+                    if (reviewSlider.scrollLeft + reviewSlider.clientWidth >= reviewSlider.scrollWidth - 10) {
+                        // Smoothly scroll back to start
+                        reviewSlider.scrollTo({ left: 0, behavior: 'smooth' });
+                    } else {
+                        // Scroll right
+                        reviewSlider.scrollBy({ left: 350, behavior: 'smooth' });
+                    }
+                }
+            }, 3500); // Scroll every 3.5 seconds
+        }
+
+        function stopAutoScroll() {
+            clearInterval(autoScrollInterval);
+        }
+
+        // Start auto-scroll on load
+        startAutoScroll();
+
+        // Pause on hover/touch interaction
+        const reviewContainer = document.querySelector('.relative.group'); // Parent container
+        
+        if(reviewContainer) {
+            reviewContainer.addEventListener('mouseenter', () => {
+                isHovering = true;
+            });
+            
+            reviewContainer.addEventListener('mouseleave', () => {
+                isHovering = false;
+            });
+
+            reviewContainer.addEventListener('touchstart', () => {
+                isHovering = true;
+            });
+             reviewContainer.addEventListener('touchend', () => {
+                // Delay restarting auto-scroll on mobile so user can read after scrolling
+                setTimeout(() => { isHovering = false; }, 2000);
+            });
+        }
+
+    </script>
+</body>
+</html>
